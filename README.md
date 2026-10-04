@@ -57,7 +57,9 @@ Saqr Download Manager is free to try with every feature for **30 days**. After t
 - **Lifetime license**: pay once, updates included.
 - **Yearly license**: renews every year.
 
-Payments are handled securely by [Lemon Squeezy](https://www.lemonsqueezy.com). The license key arrives by email and is entered in the app under **Help → Activation**.
+Payments are handled securely by [Lemon Squeezy](https://www.lemonsqueezy.com). The license key arrives by email and is entered in the app under **Help → Activation**. Each key works on 1 computer and 1 phone.
+
+[Terms of use and privacy](TERMS.md) · [Refund policy (14-day money-back)](REFUND.md)
 
 ### Support
 
@@ -104,7 +106,9 @@ Payments are handled securely by [Lemon Squeezy](https://www.lemonsqueezy.com). 
 - **ترخيص مدى الحياة**: دفعة واحدة مع التحديثات.
 - **ترخيص سنوي**: يتجدد كل سنة.
 
-الدفع آمن عبر [Lemon Squeezy](https://www.lemonsqueezy.com)، ويصلك المفتاح بالبريد وتُدخله من **مساعدة ← التفعيل**.
+الدفع آمن عبر [Lemon Squeezy](https://www.lemonsqueezy.com)، ويصلك المفتاح بالبريد وتُدخله من **مساعدة ← التفعيل**. كل مفتاح يعمل على كمبيوتر واحد وجوال واحد.
+
+[شروط الاستخدام والخصوصية](TERMS.md) · [سياسة الاسترجاع (ضمان 14 يوماً)](REFUND.md)
 
 ### الدعم
 
