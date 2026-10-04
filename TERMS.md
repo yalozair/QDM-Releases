@@ -41,7 +41,7 @@ The app does not collect personal data, does not show ads and contains no analyt
 - **Check your license** with Lemon Squeezy: your license key and a device name (for example "Windows - My-PC") are sent so the key can be activated and verified.
 - **Check for updates** and download helper tools from GitHub.
 
-**Linking a phone** works directly between your devices on your local network. **Problem reports** are sent only when you choose to send them, by email or WhatsApp, and you can read their content before sending. Your purchase data (name, email, payment) is held by Lemon Squeezy under [its privacy policy](https://www.lemonsqueezy.com/privacy).
+**Linking a phone** works directly between your devices on your local network. When the phone is on a different network, the links you send pass through the public relay [ntfy.sh](https://ntfy.sh) end-to-end encrypted with your devices' pairing key, so neither the relay nor anyone else can read them; they are kept there for a few hours at most. **Problem reports** are sent only when you choose to send them, by email or WhatsApp, and you can read their content before sending. Your purchase data (name, email, payment) is held by Lemon Squeezy under [its privacy policy](https://www.lemonsqueezy.com/privacy).
 
 ### 5. No warranty
 
@@ -94,7 +94,7 @@ These terms may be updated with new versions of the app. The current version is 
 - **التحقق من الترخيص** عبر Lemon Squeezy: يُرسَل مفتاح الترخيص واسم الجهاز (مثل «Windows - My-PC») لتفعيل المفتاح والتحقق منه.
 - **البحث عن التحديثات** وتحميل الأدوات المساعدة من GitHub.
 
-**ربط الجوال** يتم مباشرة بين أجهزتك على شبكتك المحلية. و**البلاغات عن المشاكل** لا تُرسَل إلا عندما تختار إرسالها بنفسك عبر البريد أو واتساب، وتستطيع قراءة محتواها قبل الإرسال. بيانات الشراء (الاسم والبريد والدفع) يحفظها Lemon Squeezy وفق [سياسة الخصوصية الخاصة به](https://www.lemonsqueezy.com/privacy).
+**ربط الجوال** يتم مباشرة بين أجهزتك على شبكتك المحلية. وعندما يكون الجوال على شبكة أخرى، تمر الروابط التي ترسلها عبر خادم الوسيط العام [ntfy.sh](https://ntfy.sh) مشفّرة من طرف إلى طرف بمفتاح الربط بين جهازيك، فلا يستطيع الخادم ولا غيره قراءتها، ولا تبقى عليه أكثر من ساعات قليلة. و**البلاغات عن المشاكل** لا تُرسَل إلا عندما تختار إرسالها بنفسك عبر البريد أو واتساب، وتستطيع قراءة محتواها قبل الإرسال. بيانات الشراء (الاسم والبريد والدفع) يحفظها Lemon Squeezy وفق [سياسة الخصوصية الخاصة به](https://www.lemonsqueezy.com/privacy).
 
 ### 5. إخلاء المسؤولية
 
