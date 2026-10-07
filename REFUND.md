@@ -8,7 +8,7 @@
 
 ## English
 
-Every installation includes a free 30-day trial with all features, so please make sure the app works for you before buying.
+Every installation includes a free 3-month trial with all features, so please make sure the app works for you before buying.
 
 ### 14-day money-back guarantee
 
@@ -32,7 +32,7 @@ Purchases older than 14 days are not refunded, except where required by law or i
 
 ## العربية
 
-كل تثبيت يتضمن تجربة مجانية لمدة 30 يوماً بكل الميزات، فتأكد من أن البرنامج يناسبك قبل الشراء.
+كل تثبيت يتضمن تجربة مجانية لمدة 3 أشهر بكل الميزات، فتأكد من أن البرنامج يناسبك قبل الشراء.
 
 ### ضمان استرجاع المبلغ خلال 14 يوماً
 

@@ -52,7 +52,7 @@ Get them from the [Releases page](https://github.com/yalozair/QDM-Releases/relea
 
 ### License
 
-Saqr Download Manager is free to try with every feature for **30 days**. After that you can keep using a free version with limits (lower speed and video quality, one download at a time), or buy a license key:
+Saqr Download Manager is free to try with every feature for **3 months**. After that you can keep using a free version with limits (lower speed and video quality, one download at a time), or buy a license key:
 
 - **Lifetime license**: pay once, updates included.
 - **Yearly license**: renews every year.
@@ -101,7 +101,7 @@ Payments are handled securely by [Lemon Squeezy](https://www.lemonsqueezy.com). 
 
 ### الترخيص
 
-جرّب صقر للتحميل بكل ميزاته مجاناً لمدة **30 يوماً**. بعدها يمكنك الاستمرار بنسخة مجانية محدودة (سرعة وجودة فيديو أقل، وتحميل واحد في كل مرة)، أو شراء مفتاح ترخيص:
+جرّب صقر للتحميل بكل ميزاته مجاناً لمدة **3 أشهر**. بعدها يمكنك الاستمرار بنسخة مجانية محدودة (سرعة وجودة فيديو أقل، وتحميل واحد في كل مرة)، أو شراء مفتاح ترخيص:
 
 - **ترخيص مدى الحياة**: دفعة واحدة مع التحديثات.
 - **ترخيص سنوي**: يتجدد كل سنة.

@@ -12,7 +12,7 @@ By installing or using Saqr Download Manager ("the app") you agree to these term
 
 ### 1. Trial, free version and licenses
 
-- Every new installation includes a **30-day trial** with all features.
+- Every new installation includes a **3-month trial** with all features.
 - After the trial the app keeps working as a **free version** with limits (lower speed, lower video quality, one download at a time, no torrents or full playlists).
 - A **license key** unlocks the full version. Purchases are processed by [Lemon Squeezy](https://www.lemonsqueezy.com), the merchant of record, which also handles payment, taxes and invoices.
 - **Lifetime license**: one payment, valid for as long as the app is offered, including updates.
@@ -65,7 +65,7 @@ These terms may be updated with new versions of the app. The current version is 
 
 ### 1. التجربة والنسخة المجانية والتراخيص
 
-- كل تثبيت جديد يتضمن **تجربة لمدة 30 يوماً** بكل الميزات.
+- كل تثبيت جديد يتضمن **تجربة لمدة 3 أشهر** بكل الميزات.
 - بعد التجربة يستمر البرنامج **نسخةً مجانية** بحدود (سرعة أقل، وجودة فيديو أقل، وتحميل واحد في كل مرة، ودون تورنت أو قوائم تشغيل كاملة).
 - **مفتاح الترخيص** يفتح النسخة الكاملة. تتم عمليات الشراء عبر [Lemon Squeezy](https://www.lemonsqueezy.com) بصفته البائع الرسمي، وهو من يتولى الدفع والضرائب والفواتير.
 - **ترخيص مدى الحياة**: دفعة واحدة، صالح طالما كان البرنامج متاحاً، ويشمل التحديثات.
