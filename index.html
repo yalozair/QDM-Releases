@@ -1,0 +1,521 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Saqr Download Manager · صقر للتحميل</title>
+<meta name="description" content="A fast download manager for Windows and Android: multi-connection downloads, resume, torrents, video and audio, browser integration and phone-to-PC links.">
+<link rel="icon" href="images/icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0d2340;
+    --navy-2: #163b6b;
+    --blue: #2f6fd6;
+    --amber: #f5b82e;
+    --amber-2: #ffd56b;
+    --ink: #13213a;
+    --muted: #5b6b85;
+    --bg: #f5f7fb;
+    --card: #ffffff;
+    --line: #e3e8f1;
+    --radius: 18px;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: "Inter", "Segoe UI", Tahoma, sans-serif;
+    color: var(--ink);
+    background: var(--bg);
+    line-height: 1.65;
+  }
+  html[lang="ar"] body { font-family: "Cairo", "Segoe UI", Tahoma, sans-serif; }
+  html[lang="ar"] .en, html[lang="en"] .ar { display: none !important; }
+  a { color: inherit; text-decoration: none; }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+
+  /* Top bar */
+  .top {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(13, 35, 64, .85);
+    backdrop-filter: blur(10px);
+    color: #fff;
+  }
+  .top .wrap { display: flex; align-items: center; gap: 16px; height: 64px; }
+  .brand { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 18px; }
+  .brand img { width: 34px; height: 34px; border-radius: 9px; }
+  .nav { display: flex; gap: 22px; margin-inline-start: auto; font-size: 15px; opacity: .9; }
+  .nav a:hover { color: var(--amber-2); }
+  .lang {
+    border: 1px solid rgba(255,255,255,.35); background: transparent; color: #fff;
+    border-radius: 999px; padding: 6px 14px; font: inherit; font-size: 14px; cursor: pointer;
+  }
+  .lang:hover { background: rgba(255,255,255,.12); }
+
+  /* Hero */
+  .hero {
+    color: #fff;
+    background:
+      radial-gradient(900px 420px at 85% -10%, rgba(245,184,46,.28), transparent 60%),
+      radial-gradient(700px 400px at 0% 110%, rgba(47,111,214,.45), transparent 60%),
+      linear-gradient(160deg, var(--navy), var(--navy-2));
+    padding: 84px 0 96px;
+    overflow: hidden;
+  }
+  .hero .wrap { display: grid; grid-template-columns: 1.1fr .9fr; gap: 48px; align-items: center; }
+  .pill {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(245,184,46,.16); color: var(--amber-2);
+    border: 1px solid rgba(245,184,46,.4);
+    padding: 6px 14px; border-radius: 999px; font-size: 14px; font-weight: 600;
+  }
+  .hero h1 { font-size: clamp(34px, 5vw, 54px); line-height: 1.15; margin: 18px 0 14px; font-weight: 800; }
+  .hero h1 span { color: var(--amber); }
+  .hero p.lead { font-size: 19px; opacity: .88; margin: 0 0 30px; max-width: 560px; }
+  .cta { display: flex; flex-wrap: wrap; gap: 12px; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 14px 22px; border-radius: 14px; font-weight: 700; font-size: 16px;
+    transition: transform .15s ease, box-shadow .15s ease;
+  }
+  .btn:hover { transform: translateY(-2px); }
+  .btn.primary { background: var(--amber); color: #1b1300; box-shadow: 0 10px 30px rgba(245,184,46,.35); }
+  .btn.ghost { border: 1px solid rgba(255,255,255,.35); color: #fff; }
+  .btn small { display: block; font-weight: 500; font-size: 12px; opacity: .75; }
+  .hero-art { position: relative; display: flex; justify-content: center; }
+  .hero-art .glow {
+    position: absolute; inset: 10% 15%; border-radius: 50%;
+    background: radial-gradient(circle, rgba(245,184,46,.45), transparent 65%); filter: blur(30px);
+  }
+  .hero-art img.logo {
+    position: relative; width: min(300px, 70%); border-radius: 56px;
+    box-shadow: 0 30px 80px rgba(0,0,0,.45);
+    animation: float 6s ease-in-out infinite;
+  }
+  @keyframes float { 50% { transform: translateY(-12px); } }
+  .stats { display: flex; gap: 34px; margin-top: 38px; flex-wrap: wrap; }
+  .stats b { display: block; font-size: 28px; color: var(--amber-2); line-height: 1.1; }
+  .stats span { font-size: 14px; opacity: .8; }
+
+  /* Sections */
+  section { padding: 84px 0; }
+  .head { text-align: center; max-width: 680px; margin: 0 auto 48px; }
+  .head .kicker { color: var(--blue); font-weight: 700; font-size: 14px; letter-spacing: .06em; text-transform: uppercase; }
+  html[lang="ar"] .head .kicker { letter-spacing: 0; }
+  .head h2 { font-size: clamp(28px, 3.6vw, 38px); margin: 8px 0 12px; line-height: 1.25; }
+  .head p { color: var(--muted); margin: 0; font-size: 17px; }
+
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .card {
+    background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 26px; transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+  }
+  .card:hover { transform: translateY(-4px); box-shadow: 0 18px 40px rgba(19,33,58,.08); border-color: #cfd9ea; }
+  .icon {
+    width: 50px; height: 50px; border-radius: 14px; display: grid; place-items: center;
+    font-size: 25px; margin-bottom: 16px;
+    background: linear-gradient(135deg, #e8f0ff, #fff3d6);
+  }
+  .card h3 { margin: 0 0 6px; font-size: 18px; }
+  .card p { margin: 0; color: var(--muted); font-size: 15px; }
+
+  /* Showcase */
+  .showcase { background: linear-gradient(180deg, #fff, var(--bg)); }
+  .shots { display: grid; grid-template-columns: repeat(2, 1fr); gap: 26px; }
+  .shot { background: var(--card); border: 1px solid var(--line); border-radius: 22px; padding: 18px; }
+  .shot img { width: 100%; display: block; border-radius: 14px; box-shadow: 0 12px 34px rgba(19,33,58,.12); }
+  .shot figcaption { margin-top: 14px; font-weight: 700; }
+  .shot figcaption span { display: block; font-weight: 400; color: var(--muted); font-size: 14px; }
+
+  /* Platforms */
+  .platforms { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+  .platform {
+    border-radius: 22px; padding: 30px; color: #fff;
+    background: linear-gradient(150deg, var(--navy), var(--navy-2));
+  }
+  .platform.android { background: linear-gradient(150deg, #0f3b2e, #1a6b4f); }
+  .platform h3 { margin: 0 0 14px; font-size: 22px; display: flex; align-items: center; gap: 10px; }
+  .platform ul { margin: 0; padding-inline-start: 20px; opacity: .92; }
+  .platform li { margin: 6px 0; }
+
+  /* Pricing */
+  .pricing { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; align-items: stretch; }
+  .plan {
+    background: var(--card); border: 1px solid var(--line); border-radius: 22px; padding: 30px;
+    display: flex; flex-direction: column;
+  }
+  .plan.best { border: 2px solid var(--amber); box-shadow: 0 24px 50px rgba(245,184,46,.18); position: relative; }
+  .plan .badge {
+    position: absolute; top: -13px; inset-inline-start: 24px;
+    background: var(--amber); color: #1b1300; font-weight: 700; font-size: 13px;
+    padding: 4px 12px; border-radius: 999px;
+  }
+  .plan h3 { margin: 0; font-size: 20px; }
+  .price { font-size: 40px; font-weight: 800; margin: 12px 0 2px; }
+  .price small { font-size: 16px; font-weight: 600; color: var(--muted); }
+  .plan .note { color: var(--muted); font-size: 14px; margin-bottom: 18px; }
+  .plan ul { list-style: none; padding: 0; margin: 0 0 24px; flex: 1; }
+  .plan li { padding: 7px 0; border-bottom: 1px dashed var(--line); font-size: 15px; }
+  .plan li::before { content: "✓"; color: #1a9e6b; font-weight: 800; margin-inline-end: 10px; }
+  .plan li.no::before { content: "–"; color: #b0b9c9; }
+  .plan .btn { justify-content: center; }
+  .plan .btn.outline { border: 1px solid var(--line); color: var(--ink); }
+  .plan .btn.dark { background: var(--navy); color: #fff; }
+  .fine { text-align: center; color: var(--muted); font-size: 14px; margin-top: 22px; }
+
+  /* FAQ */
+  .faq { max-width: 820px; margin: 0 auto; }
+  details {
+    background: var(--card); border: 1px solid var(--line); border-radius: 16px;
+    padding: 18px 22px; margin-bottom: 12px;
+  }
+  summary { cursor: pointer; font-weight: 700; list-style: none; display: flex; justify-content: space-between; gap: 12px; }
+  summary::-webkit-details-marker { display: none; }
+  summary::after { content: "+"; color: var(--blue); font-size: 22px; line-height: 1; }
+  details[open] summary::after { content: "–"; }
+  details p { color: var(--muted); margin: 12px 0 0; }
+
+  /* Footer */
+  footer { background: var(--navy); color: rgba(255,255,255,.8); padding: 44px 0; font-size: 15px; }
+  footer .wrap { display: flex; flex-wrap: wrap; gap: 20px; justify-content: space-between; align-items: center; }
+  footer .links { display: flex; flex-wrap: wrap; gap: 18px; }
+  footer a:hover { color: var(--amber-2); }
+
+  @media (max-width: 900px) {
+    .hero .wrap, .platforms, .pricing { grid-template-columns: 1fr; }
+    .hero-art { order: -1; }
+    .hero-art img.logo { width: 180px; border-radius: 38px; }
+    .grid { grid-template-columns: repeat(2, 1fr); }
+    .nav { display: none; }
+    .lang { margin-inline-start: auto; }
+  }
+  @media (max-width: 600px) {
+    .grid, .shots { grid-template-columns: 1fr; }
+    section { padding: 60px 0; }
+  }
+  @media print {
+    * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .hero-art img.logo { animation: none; }
+    .top, .cta, .plan .btn { display: none !important; }
+    .hero { padding: 40px 0; }
+    section { padding: 36px 0; break-inside: avoid; }
+    .card, .shot, .plan { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#">
+      <img src="images/icon.png" alt="">
+      <span class="ar">صقر للتحميل</span><span class="en">Saqr Download Manager</span>
+    </a>
+    <nav class="nav">
+      <a href="#features"><span class="ar">الميزات</span><span class="en">Features</span></a>
+      <a href="#screens"><span class="ar">لقطات</span><span class="en">Screenshots</span></a>
+      <a href="#pricing"><span class="ar">الأسعار</span><span class="en">Pricing</span></a>
+      <a href="#faq"><span class="ar">أسئلة شائعة</span><span class="en">FAQ</span></a>
+    </nav>
+    <button class="lang" id="lang" type="button"><span class="ar">English</span><span class="en">العربية</span></button>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="wrap">
+    <div>
+      <span class="pill">⚡ <span class="ar">ويندوز وأندرويد</span><span class="en">Windows &amp; Android</span></span>
+      <h1 class="ar">حمّل <span>أسرع</span>،<br>وأكمل من حيث توقفت</h1>
+      <h1 class="en">Download <span>faster</span>.<br>Resume anytime.</h1>
+      <p class="lead ar">صقر للتحميل يقسّم الملف إلى اتصالات متوازية لسرعة أعلى، ويكمل التحميل إذا انقطع الاتصال، ويحفظ الفيديو والصوت، ويدعم التورنت، ويستقبل الروابط من جوالك إلى الكمبيوتر.</p>
+      <p class="lead en">Saqr splits every file into parallel connections for more speed, resumes when the connection drops, saves video and audio, handles torrents, and takes links from your phone straight to your computer.</p>
+      <div class="cta">
+        <a class="btn primary" href="https://github.com/yalozair/QDM-Releases/releases/latest">
+          ⬇ <span><span class="ar">تحميل مجاني</span><span class="en">Free download</span><small class="ar">تجربة كاملة 30 يوماً</small><small class="en">Full 30-day trial</small></span>
+        </a>
+        <a class="btn ghost" href="#pricing"><span class="ar">الأسعار</span><span class="en">See pricing</span></a>
+      </div>
+      <div class="stats">
+        <div><b>32</b><span class="ar">اتصالاً متوازياً</span><span class="en">parallel connections</span></div>
+        <div><b>1000+</b><span class="ar">موقع فيديو مدعوم</span><span class="en">supported video sites</span></div>
+        <div><b>2</b><span class="ar">لغتان: عربي وإنجليزي</span><span class="en">languages: Arabic &amp; English</span></div>
+      </div>
+    </div>
+    <div class="hero-art">
+      <div class="glow"></div>
+      <img class="logo" src="images/icon.png" alt="Saqr Download Manager">
+    </div>
+  </div>
+</div>
+
+<section id="features">
+  <div class="wrap">
+    <div class="head">
+      <div class="kicker"><span class="ar">الميزات</span><span class="en">Features</span></div>
+      <h2 class="ar">كل ما تحتاجه للتحميل في برنامج واحد</h2>
+      <h2 class="en">Everything you need to download, in one app</h2>
+      <p class="ar">مصمم ليكون سريعاً وبسيطاً، بواجهة عربية كاملة.</p>
+      <p class="en">Built to be fast and simple, with a full Arabic interface.</p>
+    </div>
+    <div class="grid">
+      <div class="card"><div class="icon">🚀</div>
+        <h3 class="ar">تحميل أسرع</h3><h3 class="en">Faster downloads</h3>
+        <p class="ar">يقسّم الملف إلى حتى 32 اتصالاً متوازياً ليستغل سرعة الإنترنت كاملة.</p>
+        <p class="en">Files are split into up to 32 parallel connections to use your full line speed.</p></div>
+      <div class="card"><div class="icon">⏯️</div>
+        <h3 class="ar">استئناف في أي وقت</h3><h3 class="en">Resume anytime</h3>
+        <p class="ar">التحميلات المتوقفة أو المنقطعة تكمل من حيث توقفت، حتى بعد إعادة تشغيل الجهاز.</p>
+        <p class="en">Paused or broken downloads continue where they stopped, even after a restart.</p></div>
+      <div class="card"><div class="icon">🎬</div>
+        <h3 class="ar">الفيديو والصوت</h3><h3 class="en">Video and audio</h3>
+        <p class="ar">احفظ الوسائط من أكثر من 1000 موقع مدعوم بالجودة التي تختارها، مع الترجمة.</p>
+        <p class="en">Save media from 1000+ supported sites in the quality you choose, with subtitles.</p></div>
+      <div class="card"><div class="icon">🧲</div>
+        <h3 class="ar">التورنت والمغناطيس</h3><h3 class="en">Torrents and magnets</h3>
+        <p class="ar">افتح ملفات التورنت وروابط المغناطيس، واختر الملفات، وتابع التفاصيل.</p>
+        <p class="en">Open .torrent files and magnet links, pick the files, and follow peers and pieces.</p></div>
+      <div class="card"><div class="icon">🧩</div>
+        <h3 class="ar">إضافة المتصفح</h3><h3 class="en">Browser extension</h3>
+        <p class="ar">تلتقط التحميلات من Chrome و Edge و Firefox، وتضيف زر تحميل فوق الفيديو.</p>
+        <p class="en">Catches downloads in Chrome, Edge and Firefox, and adds a button over videos.</p></div>
+      <div class="card"><div class="icon">📲</div>
+        <h3 class="ar">من الجوال إلى الكمبيوتر</h3><h3 class="en">Phone to computer</h3>
+        <p class="ar">أرسل الرابط من جوالك فيبدأ التحميل على الكمبيوتر، عبر Wi-Fi أو الإنترنت بتشفير.</p>
+        <p class="en">Send a link from your phone and it downloads on your PC, over Wi-Fi or encrypted over the internet.</p></div>
+      <div class="card"><div class="icon">🗓️</div>
+        <h3 class="ar">الجدولة وقائمة الانتظار</h3><h3 class="en">Scheduler and queue</h3>
+        <p class="ar">ابدأ التحميل ليلاً، وأطفئ الجهاز عند الانتهاء، وحدد السرعة في أوقات العمل.</p>
+        <p class="en">Start at night, shut down when done, and limit the speed during work hours.</p></div>
+      <div class="card"><div class="icon">📂</div>
+        <h3 class="ar">تنظيم تلقائي</h3><h3 class="en">Automatic organizing</h3>
+        <p class="ar">تصنيفات ومجلدات لكل نوع، ومراقبة الحافظة لالتقاط الروابط المنسوخة.</p>
+        <p class="en">Categories and folders per file type, and a clipboard monitor for copied links.</p></div>
+      <div class="card"><div class="icon">📋</div>
+        <h3 class="ar">عدة روابط دفعة واحدة</h3><h3 class="en">Many links at once</h3>
+        <p class="ar">الصق قائمة روابط أو قائمة تشغيل كاملة وحمّلها بخطوة واحدة.</p>
+        <p class="en">Paste a list of links or a whole playlist and download it in one step.</p></div>
+      <div class="card"><div class="icon">🛡️</div>
+        <h3 class="ar">التحقق من الملفات</h3><h3 class="en">File verification</h3>
+        <p class="ar">تأكد من سلامة الملف بـ MD5 أو SHA-1 أو SHA-256.</p>
+        <p class="en">Check file integrity with MD5, SHA-1 or SHA-256.</p></div>
+      <div class="card"><div class="icon">📊</div>
+        <h3 class="ar">الإحصائيات</h3><h3 class="en">Statistics</h3>
+        <p class="ar">كم حمّلت اليوم وهذا الأسبوع والشهر، مع رسم بياني للسرعة.</p>
+        <p class="en">How much you downloaded today, this week and month, with a speed graph.</p></div>
+      <div class="card"><div class="icon">🌙</div>
+        <h3 class="ar">عربي وإنجليزي، فاتح وداكن</h3><h3 class="en">Arabic, English, light, dark</h3>
+        <p class="ar">واجهة كاملة باللغتين، ووضع داكن، وتحديث تلقائي، ودعم البروكسي.</p>
+        <p class="en">A full bilingual interface, dark mode, automatic updates and proxy support.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="screens" class="showcase">
+  <div class="wrap">
+    <div class="head">
+      <div class="kicker"><span class="ar">لقطات من البرنامج</span><span class="en">Screenshots</span></div>
+      <h2 class="ar">بسيط من النظرة الأولى</h2>
+      <h2 class="en">Simple at first sight</h2>
+    </div>
+    <div class="shots">
+      <figure class="shot"><img src="images/batch.png" alt="">
+        <figcaption><span class="ar">عدة روابط دفعة واحدة</span><span class="en">Several links at once</span>
+          <span class="ar">الصق الروابط واختر ما تريد، والبرنامج يضع كل ملف في مجلده.</span>
+          <span class="en">Paste links, untick what you don't want, and each file goes to its folder.</span></figcaption></figure>
+      <figure class="shot"><img src="images/link_phone.png" alt="">
+        <figcaption><span class="ar">ربط الجوال</span><span class="en">Link a phone</span>
+          <span class="ar">رمز اقتران من 6 أرقام، وبعدها ترسل الروابط من الجوال مباشرة.</span>
+          <span class="en">A 6-digit pairing code, then send links from your phone in one tap.</span></figcaption></figure>
+      <figure class="shot"><img src="images/stats.png" alt="">
+        <figcaption><span class="ar">الإحصائيات</span><span class="en">Statistics</span>
+          <span class="ar">نظرة سريعة على ما حمّلته خلال آخر 14 يوماً.</span>
+          <span class="en">A quick look at what you downloaded over the last 14 days.</span></figcaption></figure>
+      <figure class="shot"><img src="images/about.png" alt="">
+        <figcaption><span class="ar">دعم مباشر من المطوّر</span><span class="en">Direct developer support</span>
+          <span class="ar">تواصل عبر واتساب أو تيليجرام أو البريد من داخل البرنامج.</span>
+          <span class="en">Reach the developer by WhatsApp, Telegram or email from inside the app.</span></figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="head">
+      <div class="kicker"><span class="ar">المنصات</span><span class="en">Platforms</span></div>
+      <h2 class="ar">على الكمبيوتر والجوال</h2>
+      <h2 class="en">On your computer and your phone</h2>
+    </div>
+    <div class="platforms">
+      <div class="platform">
+        <h3>🖥️ Windows 10 / 11</h3>
+        <ul class="ar">
+          <li>إضافة لمتصفحات Chrome و Edge و Firefox</li>
+          <li>يعمل بجانب الساعة ويبدأ مع ويندوز</li>
+          <li>جدولة وإيقاف الجهاز بعد الانتهاء</li>
+          <li>استقبال الروابط من الجوال</li>
+        </ul>
+        <ul class="en">
+          <li>Extension for Chrome, Edge and Firefox</li>
+          <li>Runs next to the clock and starts with Windows</li>
+          <li>Scheduling and shutdown when done</li>
+          <li>Receives links from your phone</li>
+        </ul>
+      </div>
+      <div class="platform android">
+        <h3>📱 Android</h3>
+        <ul class="ar">
+          <li>شارك الرابط من أي تطبيق إلى صقر</li>
+          <li>التحميل عبر Wi-Fi فقط إن أردت</li>
+          <li>استئناف تلقائي بعد عودة الإنترنت أو إعادة التشغيل</li>
+          <li>إرسال الروابط إلى الكمبيوتر</li>
+        </ul>
+        <ul class="en">
+          <li>Share a link from any app to Saqr</li>
+          <li>Wi-Fi only downloads if you prefer</li>
+          <li>Auto-resume after reconnecting or rebooting</li>
+          <li>Send links to your computer</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="pricing" class="showcase">
+  <div class="wrap">
+    <div class="head">
+      <div class="kicker"><span class="ar">الأسعار</span><span class="en">Pricing</span></div>
+      <h2 class="ar">جرّب مجاناً، وادفع مرة واحدة إن أعجبك</h2>
+      <h2 class="en">Try it free. Pay once if you like it.</h2>
+      <p class="ar">30 يوماً بكل الميزات بدون بطاقة. بعدها تستمر النسخة المجانية أو تفعّل النسخة الكاملة.</p>
+      <p class="en">30 days with every feature, no card needed. Then keep the free version or unlock everything.</p>
+    </div>
+    <div class="pricing">
+      <div class="plan">
+        <h3 class="ar">مجاني</h3><h3 class="en">Free</h3>
+        <div class="price">0 <small>SAR</small></div>
+        <div class="note ar">بعد انتهاء التجربة</div><div class="note en">after the trial</div>
+        <ul class="ar">
+          <li>نصف سرعة الإنترنت</li>
+          <li>تحميل واحد في كل مرة</li>
+          <li>الفيديو حتى 720p</li>
+          <li class="no">بدون تورنت</li>
+          <li class="no">بدون قوائم تشغيل كاملة</li>
+        </ul>
+        <ul class="en">
+          <li>Half your line speed</li>
+          <li>One download at a time</li>
+          <li>Video up to 720p</li>
+          <li class="no">No torrents</li>
+          <li class="no">No whole playlists</li>
+        </ul>
+        <a class="btn outline" href="https://github.com/yalozair/QDM-Releases/releases/latest"><span class="ar">تحميل</span><span class="en">Download</span></a>
+      </div>
+      <div class="plan best">
+        <span class="badge ar">الأفضل قيمة</span><span class="badge en">Best value</span>
+        <h3 class="ar">مدى الحياة</h3><h3 class="en">Lifetime</h3>
+        <div class="price">75 <small>SAR</small></div>
+        <div class="note ar">دفعة واحدة، مع التحديثات</div><div class="note en">one-time payment, updates included</div>
+        <ul class="ar">
+          <li>السرعة الكاملة</li>
+          <li>عدة تحميلات في نفس الوقت</li>
+          <li>كل جودات الفيديو حتى 4K</li>
+          <li>التورنت وقوائم التشغيل</li>
+          <li>كمبيوتر واحد + جوال واحد</li>
+        </ul>
+        <ul class="en">
+          <li>Full speed</li>
+          <li>Several downloads at once</li>
+          <li>Every video quality up to 4K</li>
+          <li>Torrents and playlists</li>
+          <li>1 computer + 1 phone</li>
+        </ul>
+        <a class="btn primary" href="https://alozair.lemonsqueezy.com/checkout/buy/94bd5b22-980f-4ca6-97b4-8ec22a921af1?enabled=2217101"><span class="ar">شراء مدى الحياة</span><span class="en">Buy lifetime</span></a>
+      </div>
+      <div class="plan">
+        <h3 class="ar">سنوي</h3><h3 class="en">Yearly</h3>
+        <div class="price">30 <small>SAR / <span class="ar">سنة</span><span class="en">year</span></small></div>
+        <div class="note ar">يتجدد سنوياً، وتلغيه متى شئت</div><div class="note en">renews yearly, cancel anytime</div>
+        <ul class="ar">
+          <li>كل ميزات النسخة الكاملة</li>
+          <li>كمبيوتر واحد + جوال واحد</li>
+          <li>التحديثات طوال الاشتراك</li>
+        </ul>
+        <ul class="en">
+          <li>Every full-version feature</li>
+          <li>1 computer + 1 phone</li>
+          <li>Updates while subscribed</li>
+        </ul>
+        <a class="btn dark" href="https://alozair.lemonsqueezy.com/checkout/buy/9de46376-6357-46c2-9120-717cb0e87d0e?enabled=2217102"><span class="ar">اشتراك سنوي</span><span class="en">Subscribe yearly</span></a>
+      </div>
+    </div>
+    <p class="fine ar">الدفع آمن عبر Lemon Squeezy، ويصلك مفتاح التفعيل بالبريد فوراً. ضمان استرداد خلال 14 يوماً.</p>
+    <p class="fine en">Secure checkout by Lemon Squeezy. Your license key arrives by email right away. 14-day money-back guarantee.</p>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <div class="head">
+      <div class="kicker"><span class="ar">أسئلة شائعة</span><span class="en">FAQ</span></div>
+      <h2 class="ar">قبل أن تبدأ</h2>
+      <h2 class="en">Before you start</h2>
+    </div>
+    <div class="faq">
+      <details>
+        <summary><span class="ar">هل أحتاج بطاقة لبدء التجربة؟</span><span class="en">Do I need a card for the trial?</span></summary>
+        <p class="ar">لا. حمّل البرنامج واستخدمه بكل ميزاته 30 يوماً بدون أي بيانات دفع.</p>
+        <p class="en">No. Download the app and use every feature for 30 days without any payment details.</p>
+      </details>
+      <details>
+        <summary><span class="ar">كيف أفعّل البرنامج بعد الشراء؟</span><span class="en">How do I activate after buying?</span></summary>
+        <p class="ar">يصلك مفتاح التفعيل بالبريد فور الشراء. افتح البرنامج، ثم مساعدة ← التفعيل، والصق المفتاح.</p>
+        <p class="en">Your license key is emailed right after purchase. Open the app, go to Help → Activation and paste it.</p>
+      </details>
+      <details>
+        <summary><span class="ar">على كم جهاز يعمل المفتاح؟</span><span class="en">How many devices does a key cover?</span></summary>
+        <p class="ar">كمبيوتر واحد وجوال واحد. يمكنك إلغاء التفعيل من جهاز ونقله إلى جهاز آخر.</p>
+        <p class="en">One computer and one phone. You can deactivate a device and move the key to another.</p>
+      </details>
+      <details>
+        <summary><span class="ar">ماذا يحدث بعد انتهاء التجربة إن لم أشترِ؟</span><span class="en">What happens if I don't buy after the trial?</span></summary>
+        <p class="ar">يستمر البرنامج بالعمل كنسخة مجانية: نصف السرعة، وتحميل واحد في كل مرة، وفيديو حتى 720p.</p>
+        <p class="en">The app keeps working as a free version: half speed, one download at a time, video up to 720p.</p>
+      </details>
+      <details>
+        <summary><span class="ar">هل يمكنني استرداد المبلغ؟</span><span class="en">Can I get a refund?</span></summary>
+        <p class="ar">نعم، خلال 14 يوماً من الشراء. راجع <a href="https://github.com/yalozair/QDM-Releases/blob/main/REFUND.md"><u>سياسة الاسترداد</u></a>.</p>
+        <p class="en">Yes, within 14 days of purchase. See the <a href="https://github.com/yalozair/QDM-Releases/blob/main/REFUND.md"><u>refund policy</u></a>.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>© 2026 Yousif Alozair · <span class="ar">صقر للتحميل</span><span class="en">Saqr Download Manager</span></div>
+    <div class="links">
+      <a href="https://github.com/yalozair/QDM-Releases/blob/main/TERMS.md"><span class="ar">الشروط والخصوصية</span><span class="en">Terms &amp; privacy</span></a>
+      <a href="https://github.com/yalozair/QDM-Releases/blob/main/REFUND.md"><span class="ar">سياسة الاسترداد</span><span class="en">Refunds</span></a>
+      <a href="mailto:yalozair2013@gmail.com">yalozair2013@gmail.com</a>
+      <a href="https://wa.me/967773640964">WhatsApp</a>
+      <a href="https://t.me/Eng_yousifalozair">Telegram</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const html = document.documentElement;
+  function setLang(lang) {
+    html.lang = lang;
+    html.dir = lang === 'ar' ? 'rtl' : 'ltr';
+    document.title = lang === 'ar' ? 'صقر للتحميل · Saqr Download Manager' : 'Saqr Download Manager · صقر للتحميل';
+  }
+  const asked = new URLSearchParams(location.search).get('lang');
+  setLang(asked === 'en' || asked === 'ar' ? asked : (navigator.language || '').startsWith('ar') ? 'ar' : 'en');
+  document.getElementById('lang').addEventListener('click', () => setLang(html.lang === 'ar' ? 'en' : 'ar'));
+</script>
+</body>
+</html>
